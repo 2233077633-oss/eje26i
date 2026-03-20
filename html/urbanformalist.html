@@ -49,13 +49,12 @@
     <div class="nav-links">
         <a href="../index.html">Inicio</a>
         <a href="streetwear.html">streetwear</a>
-        <a href="urbanformalist.html">urbanformalist</a>
         <a href="imagen1.html">lina</a>
     </div>
 
     <div class="overlay" id="overlay"></div>
 
-    <div class="caption" id="caption">↑↑↑↑↑↑↑↑↑↑</div>
+    <div class="caption" id="caption"></div>
 
     <script>
         const overlay = document.getElementById('overlay');
@@ -79,15 +78,15 @@
         ];
 
         let idxCapa = 0;
-        const arrowCount = 10;
+        const arrowCount = 9;
 
         function updateCaption() {
             const remaining = Math.max(0, arrowCount - idxCapa);
-            if (remaining === 0) {
-                caption.innerText = 'Collage completo!';
-                return;
-            }
-            caption.innerText = '↑'.repeat(remaining);
+             if (remaining === 0) {
+             caption.innerText = '';
+            return;
+        }
+          caption.innerText = '↑'.repeat(remaining);
         }
 
         function agregarCapa() {

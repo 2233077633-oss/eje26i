@@ -77,9 +77,9 @@
 </head>
 <body class="photo-page">
     <div class="nav-links">
-        <a href="../index.html">Inicio</a>
-        <a href="streetwear.html">streetwear</a>
-        <a href="urbanformalist.html">urban formalist</a>
+        <a href="../index.html">Portada</a>
+      
+        <a href="urbanformalist.html">urbanformalist</a>
         <a href="imagen1.html">lina</a>
     </div>
 
@@ -122,13 +122,13 @@ const caption = document.getElementById('caption');
 function updateCaption() {
   const remaining = Math.max(0, arrowCount - idxCapa);
   if (remaining === 0) {
-    caption.innerText = '!';
+    caption.innerText = '';
     return;
   }
   caption.innerText = '↑'.repeat(remaining);
 }
 
-// función para agregar una capa encima de 1.png
+
 function agregarCapa() {
   if (idxCapa >= capas.length) return;
 
@@ -147,11 +147,11 @@ function agregarCapa() {
   updateCaption();
 }
 
-// al mover o arrastrar el mouse aparecen capas
+
 let lastTime = 0;
 imgContainer.addEventListener('mousemove', () => {
   const now = Date.now();
-  if (now - lastTime > 200) { // evita que salgan todas de golpe
+  if (now - lastTime > 200) { 
     agregarCapa();
     lastTime = now;
   }

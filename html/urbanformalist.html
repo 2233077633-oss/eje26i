@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pag2</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="html/favicon.ico">
+    <style>
+        body {
+            background: #222;
+            color: #b3d1ff;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .nav-links {
+            margin: 30px 0 20px 0;
+        }
+        .nav-links a {
+            color: #898989;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #9000ff;
+        }
+        .overlay {
+            position: relative;
+            width: 100%;
+            min-height: 70vh;
+        }
+        .caption {
+            margin-top: 18px;
+            font-size: 1.2em;
+            color: #b700ff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="photo-page">
+    <div class="nav-links">
+        <a href="../index.html">Inicio</a>
+        <a href="streetwear.html">streetwear</a>
+        <a href="urbanformalist.html">urbanformalist</a>
+        <a href="imagen1.html">Imagen 1</a>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="caption" id="caption">↑↑↑↑↑↑↑↑↑↑</div>
+
+    <script>
+        const overlay = document.getElementById('overlay');
+        const caption = document.getElementById('caption');
+
+        overlay.style.position = 'relative';
+        overlay.style.display = 'flex';
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'center';
+
+        const capas = [
+            '../assets/alfonso0.png',
+            '../assets/al1.png',
+            '../assets/al2.png',
+            '../assets/al3.png',
+            '../assets/al4.png',
+            '../assets/al5.png',
+            '../assets/al6.png',
+            '../assets/al7.png',
+            '../assets/al8.png'
+        ];
+
+        let idxCapa = 0;
+        const arrowCount = 10;
+
+        function updateCaption() {
+            const remaining = Math.max(0, arrowCount - idxCapa);
+            if (remaining === 0) {
+                caption.innerText = 'Collage completo!';
+                return;
+            }
+            caption.innerText = '↑'.repeat(remaining);
+        }
+
+        function agregarCapa() {
+            if (idxCapa >= capas.length) return;
+
+            const img = document.createElement('img');
+            img.src = capas[idxCapa++];
+            img.style.position = 'absolute';
+            img.style.left = '50%';
+            img.style.top = '50%';
+            img.style.transform = 'translate(-50%, -50%)';
+            img.style.width = 'auto';
+            img.style.maxWidth = '90vw';
+            img.style.maxHeight = '70vh';
+            img.style.zIndex = String(100 + idxCapa);
+
+            overlay.appendChild(img);
+
+            updateCaption();
+        }
+
+        document.body.addEventListener('click', (event) => {
+            if (event.target && event.target.tagName === 'A') return;
+            agregarCapa();
+        });
+
+        updateCaption();
+    </script>
+</body>
+</html>

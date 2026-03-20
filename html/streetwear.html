@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pag1 - Cogalle Integration</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="html/favicon.ico">
+    <style>
+        body {
+            background: #f6f6f6;
+            color: #a8ffb0;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .nav-links {
+            margin: 30px 0 20px 0;
+        }
+
+        .nav-links a {
+            color: #0a004d6d;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #000dff;
+        }
+
+        .img-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .img-container img {
+            display: block;
+            max-width: 90vw;
+            max-height: 70vh;
+            width: auto;
+            height: auto;
+        }
+
+        .img-container .layer {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .img-container .base {
+            z-index: 100;
+        }
+
+        .cogalle-img.active {
+            z-index: 10 !important;
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        .caption {
+            margin-top: 18px;
+            font-size: 1.2em;
+            color: #0022ff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="photo-page">
+    <div class="nav-links">
+        <a href="../index.html">Inicio</a>
+        <a href="streetwear.html">streetwear</a>
+        <a href="urbanformalist.html">urban formalist</a>
+        <a href="imagen1.html">Imagen 1</a>
+    </div>
+
+    <div class="img-container" id="imgContainer">
+        <img src="../assets/salas0.png" alt="Foto 1" id="mainImg" />
+    </div>
+
+
+
+
+    <div class="caption" id="caption">↑↑↑↑↑↑↑↑↑↑</div>
+
+<script>
+const imgContainer = document.getElementById('imgContainer');
+const mainImg = document.getElementById('mainImg');
+
+imgContainer.style.position = 'relative';
+mainImg.style.position = 'relative';
+mainImg.style.zIndex = '100';
+
+// capas que se van completando
+const capas = [
+  '../assets/salas0.png',
+  '../assets/sal1.png',
+  '../assets/sal2.png',
+  '../assets/sal3.png',
+  '../assets/sal4.png',
+  '../assets/sal5.png',
+  '../assets/sal6.png',
+  '../assets/sal7.png',
+  '../assets/sal9.png',
+  '../assets/sal9.png',
+  '../assets/7_(1).png',
+
+];
+
+let idxCapa = 0;
+const arrowCount = 10;
+const caption = document.getElementById('caption');
+
+function updateCaption() {
+  const remaining = Math.max(0, arrowCount - idxCapa);
+  if (remaining === 0) {
+    caption.innerText = '!';
+    return;
+  }
+  caption.innerText = '↑'.repeat(remaining);
+}
+
+// función para agregar una capa encima de 1.png
+function agregarCapa() {
+  if (idxCapa >= capas.length) return;
+
+  const img = document.createElement('img');
+  img.src = capas[idxCapa++];
+  img.style.position = 'absolute';
+  img.style.left = '50%';
+  img.style.top = '50%';
+  img.style.transform = 'translate(-50%, -50%)';
+  img.style.zIndex = String(200 + idxCapa);
+  img.style.width = 'auto';
+  img.style.maxWidth = '90vw';
+  img.style.maxHeight = '70vh';
+
+  imgContainer.appendChild(img);
+  updateCaption();
+}
+
+// al mover o arrastrar el mouse aparecen capas
+let lastTime = 0;
+imgContainer.addEventListener('mousemove', () => {
+  const now = Date.now();
+  if (now - lastTime > 200) { // evita que salgan todas de golpe
+    agregarCapa();
+    lastTime = now;
+  }
+});
+
+updateCaption();
+</script>

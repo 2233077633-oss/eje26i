@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagen 1</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            background: #3b0014;
+            color: #828282;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .nav-links {
+            margin: 30px 0 20px 0;
+        }
+        .nav-links a {
+            color: #8c8c8c;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #ff04fb;
+        }
+        .img-container {
+            margin-top: 30px;
+            position: relative;
+        }
+        .img-container img {
+            display: block;
+            max-width: 90vw;
+            max-height: 70vh;
+            width: auto;
+            height: auto;
+        }
+        .caption {
+            margin-top: 18px;
+            font-size: 1.2em;
+            color: #ff00ee;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-links">
+        <a href="../index.html">Inicio</a>
+        <a href="streetwear.html">streetwear</a>
+        <a href="urbanformalist.html">urbanformalist</a>
+        <a href="imagen1.html">Imagen 1</a>
+    </div>
+    <div class="img-container" id="imgContainer">
+        <img src="../assets/lina0.png" alt="Imagen 1" id="mainImg" />
+    </div>
+    <div class="caption" id="caption">↑↑↑↑↑↑↑</div>
+    <script>
+        const imgContainer = document.getElementById('imgContainer');
+        const mainImg = document.getElementById('mainImg');
+        const caption = document.getElementById('caption');
+
+        mainImg.style.position = 'relative';
+        mainImg.style.zIndex = '100';
+        mainImg.style.cursor = 'pointer';
+
+        const capas = [
+            '../assets/lina1.png',
+            '../assets/lina2.png',
+            '../assets/lina3.png',
+            '../assets/lina4.png',
+            '../assets/lina5.png',
+            '../assets/lina6.png',
+            '../assets/lina7.png'
+        ];
+
+        let idxCapa = 0;
+        const arrowCount = capas.length;
+
+        function updateCaption() {
+            const remaining = Math.max(0, arrowCount - idxCapa);
+            if (remaining === 0) {
+                caption.innerText = 'Collage completo!';
+                return;
+            }
+            caption.innerText = '↑'.repeat(remaining);
+        }
+
+        function agregarCapa() {
+            if (idxCapa >= capas.length) return;
+
+            const img = document.createElement('img');
+            img.src = capas[idxCapa++];
+            img.style.position = 'absolute';
+            img.style.left = '50%';
+            img.style.top = '50%';
+            img.style.transform = 'translate(-50%, -50%)';
+            img.style.width = 'auto';
+            img.style.maxWidth = '90vw';
+            img.style.maxHeight = '70vh';
+            img.style.zIndex = String(110 + idxCapa);
+
+            imgContainer.appendChild(img);
+            updateCaption();
+        }
+
+        let lastTime = 0;
+        imgContainer.addEventListener('wheel', (event) => {
+            event.preventDefault();
+            const now = Date.now();
+            if (now - lastTime > 200) {
+                agregarCapa();
+                lastTime = now;
+            }
+        }, { passive: false });
+
+        updateCaption();
+    </script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>streetwear</title>
+    <title>streatwear</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/x-icon" href="html/favicon.ico">
     <style>
@@ -78,13 +78,13 @@
 <body class="photo-page">
     <div class="nav-links">
         <a href="../index.html">Portada</a>
+        <a href="streetwear.html">streetwear</a>
         <a href="urbanformalist.html">urbanformalist</a>
         <a href="imagen1.html">lina</a>
-        <a href="fer.html">fer</a>
     </div>
 
     <div class="img-container" id="imgContainer">
-        <img src="../assets/salas0.png" alt="Foto 1" id="mainImg" />
+        <img src="../assets/fer.png" alt="Foto 1" id="mainImg" />
     </div>
 
 
@@ -100,29 +100,33 @@ imgContainer.style.position = 'relative';
 mainImg.style.position = 'relative';
 mainImg.style.zIndex = '100';
 
-
+// capas que se van completando
 const capas = [
-  '../assets/salas0.png',
-  '../assets/sal1.png',
-  '../assets/sal2.png',
-  '../assets/sal3.png',
-  '../assets/sal4.png',
-  '../assets/sal5.png',
-  '../assets/sal6.png',
-  '../assets/sal7.png',
-  '../assets/sal8.png',
-  '../assets/sal9.png'
+  '../assets/fer.png',
+  '../assets/feruno.png',
+  '../assets/ferdos.png',
+  '../assets/fertres.png',
+  '../assets/fercuatro.png',
+  '../assets/fercinco.png',
+  '../assets/ferseis.png',
+  '../assets/fersiete.png',
+  '../assets/ferocho.png',
+  '../assets/fernueve.png',
+  '../assets/ferrosa.png',
+  '../assets/fernaranja.png',
+  '../assets/ferverde.png'
+
 
 ];
 
 let idxCapa = 0;
-const arrowCount = 10;
+const arrowCount = 9;
 const caption = document.getElementById('caption');
 
 function updateCaption() {
   const remaining = Math.max(0, arrowCount - idxCapa);
   if (remaining === 0) {
-    caption.innerText = '';
+    caption.innerText = '¿Alguna vez has usado algo que no te identificaba?';
     return;
   }
   caption.innerText = '↑'.repeat(remaining);
@@ -149,7 +153,7 @@ function agregarCapa() {
 
 
 let lastTime = 0;
-imgContainer.addEventListener('mousemove', () => {
+imgContainer.addEventListener('click', () => {
   const now = Date.now();
   if (now - lastTime > 200) { 
     agregarCapa();

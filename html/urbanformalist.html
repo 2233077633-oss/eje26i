@@ -8,8 +8,8 @@
     <link rel="icon" type="image/x-icon" href="html/favicon.ico">
     <style>
         body {
-            background: #ffffff;
-            color: #b3d1ff;
+            background: #f6f6f6;
+            color: #a8ffb0;
             min-height: 100vh;
             margin: 0;
             display: flex;
@@ -17,107 +17,146 @@
             align-items: center;
             justify-content: flex-start;
         }
+
         .nav-links {
             margin: 30px 0 20px 0;
         }
+
         .nav-links a {
             color: #000000;
             text-decoration: none;
             margin-right: 20px;
             font-size: 18px;
             font-weight: bold;
-            
             transition: all 0.3s ease;
         }
+
         .nav-links a:hover {
-            color: #9000ff;
+            color: #000dff;
         }
-        .overlay {
+
+        .img-container {
             position: relative;
-            width: 100%;
-            min-height: 70vh;
+            margin-bottom: 20px;
         }
+
+        .img-container img {
+            display: block;
+            max-width: 90vw;
+            max-height: 70vh;
+            width: auto;
+            height: auto;
+        }
+
+        .img-container .layer {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .img-container .base {
+            z-index: 100;
+        }
+
+        .cogalle-img.active {
+            z-index: 10 !important;
+            transform: rotate(0deg) scale(1.1);
+        }
+
         .caption {
             margin-top: 18px;
             font-size: 1.2em;
-            color: #b700ff;
+            color: #0022ff;
             text-align: center;
         }
     </style>
 </head>
 <body class="photo-page">
     <div class="nav-links">
-        <a href="../index.html">Inicio</a>
+        <a href="../index.html">Portada</a>
         <a href="streetwear.html">streetwear</a>
         <a href="imagen1.html">lina</a>
         <a href="fer.html">fer</a>
     </div>
 
-    <div class="overlay" id="overlay"></div>
+    <div class="img-container" id="imgContainer">
+        <img src="../assets/alfonso0.png" alt="Foto 1" id="mainImg" />
+    </div>
 
-    <div class="caption" id="caption"></div>
 
-    <script>
-        const overlay = document.getElementById('overlay');
-        const caption = document.getElementById('caption');
 
-        overlay.style.position = 'relative';
-        overlay.style.display = 'flex';
-        overlay.style.alignItems = 'center';
-        overlay.style.justifyContent = 'center';
 
-        const capas = [
-            '../assets/alfonso0.png',
-            '../assets/al1.png',
-            '../assets/al2.png',
-            '../assets/al3.png',
-            '../assets/al4.png',
-            '../assets/al5.png',
-            '../assets/al6.png',
-            '../assets/al7.png',
-            '../assets/al8.png',
-            "../assets/alfonsoblanco.png",
-            "../assets/alfonsocafe.png",
-            "../assets/alfonsorojo.png",
-        ];
+    <div class="caption" id="caption">↑↑↑↑↑↑↑↑↑↑</div>
 
-        let idxCapa = 0;
-        const arrowCount = 9;
+<script>
+const imgContainer = document.getElementById('imgContainer');
+const mainImg = document.getElementById('mainImg');
 
-        function updateCaption() {
-            const remaining = Math.max(0, arrowCount - idxCapa);
-             if (remaining === 0) {
-             caption.innerText = '¿hay colores que nunca usarias?';
-            return;
-        }
-          caption.innerText = '↑'.repeat(remaining);
-        }
+imgContainer.style.position = 'relative';
+mainImg.style.position = 'relative';
+mainImg.style.zIndex = '100';
 
-        function agregarCapa() {
-            if (idxCapa >= capas.length) return;
 
-            const img = document.createElement('img');
-            img.src = capas[idxCapa++];
-            img.style.position = 'absolute';
-            img.style.left = '50%';
-            img.style.top = '50%';
-            img.style.transform = 'translate(-50%, -50%)';
-            img.style.width = 'auto';
-            img.style.maxWidth = '90vw';
-            img.style.maxHeight = '70vh';
-            img.style.zIndex = String(100 + idxCapa);
+const capas = [
+  '../assets/al1.png',
+  '../assets/al2.png',
+  '../assets/al3.png',
+  '../assets/al4.png',
+  '../assets/al5.png',
+  '../assets/al6.png',
+  '../assets/al7.png',
+  '../assets/al8.png',
+  "../assets/alfonsoblanco.png",
+  "../assets/alfonsocafe.png",
+  "../assets/alfonsorojo.png"
 
-            overlay.appendChild(img);
+];
 
-            updateCaption();
-        }
+let idxCapa = 0;
+const arrowCount = 9;
+const caption = document.getElementById('caption');
 
-        document.body.addEventListener('click', (event) => {
-            if (event.target && event.target.tagName === 'A') return;
-            agregarCapa();
-        });
+function updateCaption() {
+  const remaining = Math.max(0, arrowCount - idxCapa);
+  if (remaining === 0) {
+    caption.innerText = '¿Hay colores que no te identifican?';
+    return;
+  }
+  caption.innerText = '↑'.repeat(remaining);
+}
 
-        updateCaption();
-    </script>
-</body>
-</html>
+
+function agregarCapa() {
+  if (idxCapa >= capas.length) return;
+
+  const img = document.createElement('img');
+  img.src = capas[idxCapa++];
+  img.style.position = 'absolute';
+  img.style.left = '50%';
+  img.style.top = '50%';
+  img.style.transform = 'translate(-50%, -50%)';
+  img.style.zIndex = String(200 + idxCapa);
+  img.style.width = 'auto';
+  img.style.maxWidth = '90vw';
+  img.style.maxHeight = '70vh';
+
+  imgContainer.appendChild(img);
+  updateCaption();
+}
+
+
+let lastTime = 0;
+imgContainer.addEventListener('click', () => {
+  const now = Date.now();
+  if (now - lastTime > 200) { 
+    agregarCapa();
+    lastTime = now;
+  }
+});
+
+updateCaption();
+
+</script>
+

@@ -102,7 +102,6 @@ mainImg.style.zIndex = '100';
 
 
 const capas = [
-  '../assets/salas0.png',
   '../assets/sal1.png',
   '../assets/sal2.png',
   '../assets/sal3.png',
@@ -111,18 +110,21 @@ const capas = [
   '../assets/sal6.png',
   '../assets/sal7.png',
   '../assets/sal8.png',
-  '../assets/sal9.png'
+  '../assets/sal9.png',
+  '../assets/siluetasalasazul.png',
+  '../assets/siluetasalasmorada.png',
+  '../assets/siluetasalasrosa.png'
 
 ];
 
 let idxCapa = 0;
-const arrowCount = 10;
+const arrowCount = 9;
 const caption = document.getElementById('caption');
 
 function updateCaption() {
   const remaining = Math.max(0, arrowCount - idxCapa);
   if (remaining === 0) {
-    caption.innerText = '';
+    caption.innerText = '¿Alguna vez has comprado algo por tendencia?';
     return;
   }
   caption.innerText = '↑'.repeat(remaining);
@@ -149,7 +151,7 @@ function agregarCapa() {
 
 
 let lastTime = 0;
-imgContainer.addEventListener('mousemove', () => {
+imgContainer.addEventListener('click', () => {
   const now = Date.now();
   if (now - lastTime > 200) { 
     agregarCapa();

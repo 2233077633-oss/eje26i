@@ -80,15 +80,18 @@
             '../assets/lina6.png',
             '../assets/lina7.png',
             "../assets/lina8.png",
+            "../assets/linamorado.png",
+            "../assets/linanaranja.png",
+            "../assets/linaverde.png"
         ];
 
         let idxCapa = 0;
-        const arrowCount = capas.length;
+        const arrowCount = 8;
 
         function updateCaption() {
             const remaining = Math.max(0, arrowCount - idxCapa);
             if (remaining === 0) {
-                caption.innerText = '';
+                caption.innerText = '¿Consumes fash fashion?';
                 return;
             }
             caption.innerText = '↑'.repeat(remaining);
@@ -113,7 +116,7 @@
         }
 
         let lastTime = 0;
-        imgContainer.addEventListener('wheel', (event) => {
+        imgContainer.addEventListener('click', (event) => {
             event.preventDefault();
             const now = Date.now();
             if (now - lastTime > 200) {

@@ -8,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="html/favicon.ico">
     <style>
         body {
-            background: #222;
+            background: #ffffff;
             color: #b3d1ff;
             min-height: 100vh;
             margin: 0;
@@ -21,12 +21,12 @@
             margin: 30px 0 20px 0;
         }
         .nav-links a {
-            color: #898989;
+            color: #000000;
             text-decoration: none;
             margin-right: 20px;
             font-size: 18px;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            
             transition: all 0.3s ease;
         }
         .nav-links a:hover {
@@ -75,7 +75,10 @@
             '../assets/al5.png',
             '../assets/al6.png',
             '../assets/al7.png',
-            '../assets/al8.png'
+            '../assets/al8.png',
+            "../assets/alfonsoblanco.png",
+            "../assets/alfonsocafe.png",
+            "../assets/alfonsorojo.png",
         ];
 
         let idxCapa = 0;
@@ -84,7 +87,7 @@
         function updateCaption() {
             const remaining = Math.max(0, arrowCount - idxCapa);
              if (remaining === 0) {
-             caption.innerText = '';
+             caption.innerText = '¿hay colores que nunca usarias?';
             return;
         }
           caption.innerText = '↑'.repeat(remaining);

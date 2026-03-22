@@ -1,4 +1,7 @@
 /* Centrado, color rojo y margen superior para el enlace 'MÁS QUE TELA' */
+.creditosu {
+	color: #ff0000;
+}
 .mas-que-tela {
 	display: block;
 	margin: 40px auto 0 auto;
@@ -113,4 +116,3 @@ body {
 		flex-direction: column;
 	}
 }
-

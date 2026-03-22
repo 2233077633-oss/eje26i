@@ -43,8 +43,8 @@
         }
         .caption {
             margin-top: 18px;
-            font-size: 1.2em;
-            color: #ff00ee;
+            font-size: 30px;
+            color: #000000;
             text-align: center;
         }
     </style>
@@ -79,9 +79,7 @@
             '../assets/lina6.png',
             '../assets/lina7.png',
             "../assets/lina8.png",
-            "../assets/linamorado.png",
-            "../assets/linanaranja.png",
-            "../assets/linaverde.png"
+            "../assets/canvauno.png"
         ];
 
         let idxCapa = 0;
@@ -90,7 +88,7 @@
         function updateCaption() {
             const remaining = Math.max(0, arrowCount - idxCapa);
             if (remaining === 0) {
-                caption.innerText = '¿Consumes fash fashion?';
+                caption.innerText = '¿Alguna vez has consumido fash fashion?';
                 return;
             }
             caption.innerText = '↑'.repeat(remaining);

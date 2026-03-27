@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siluetas completas</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --text: #d9d2c6;
+      --muted: #7b756d;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #0b0b0b;
+      color: var(--text);
+      font-family: "Georgia", "Times New Roman", serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .stage {
+      width: min(1200px, 100%);
+      text-align: center;
+    }
+    .eyebrow {
+      font-family: "Courier New", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 34px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(160px, 1fr));
+      gap: 26px;
+    }
+    .card {
+      background: var(--card);
+      border: none;
+      padding: 18px 12px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    .card img {
+      max-height: 360px;
+      width: auto;
+      height: auto;
+    }
+    .hint {
+      margin-top: 24px;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: repeat(2, minmax(160px, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .grid { grid-template-columns: 1fr; }
+      .card { min-height: 360px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <div class="eyebrow">SOBRE LA ROPA Y LO QUE CREEMOS QUE SOMOS.</div>
+    <div class="grid" id="grid">
+      <button class="card" data-id="sal"></button>
+      <button class="card" data-id="lina"></button>
+      <button class="card" data-id="alfonso"></button>
+    </div>
+    <div class="hint" id="hint">llena una Silueta.</div>
+  </main>
+
+  <script>
+    const data = {
+      sal: {
+        base: '../assets/salas0.png',
+        layers: [
+          '../assets/sal1.png',
+          '../assets/sal2.png',
+          '../assets/sal3.png',
+          '../assets/sal4.png',
+          '../assets/sal5.png',
+          '../assets/sal6.png',
+          '../assets/sal7.png',
+          '../assets/sal8.png',
+          '../assets/sal9.png'
+        ]
+      },
+      lina: {
+        base: '../assets/lina0.png',
+        layers: [
+          '../assets/lina1.png',
+          '../assets/lina2.png',
+          '../assets/lina3.png',
+          '../assets/lina4.png',
+          '../assets/lina5.png',
+          '../assets/lina6.png',
+          '../assets/lina7.png',
+          '../assets/lina8.png'
+        ]
+      },
+      alfonso: {
+        base: '../assets/alfonso0.png',
+        layers: [
+          '../assets/al1.png',
+          '../assets/al2.png',
+          '../assets/al3.png',
+          '../assets/al4.png',
+          '../assets/al5.png',
+          '../assets/al6.png',
+          '../assets/al7.png',
+          '../assets/al8.png'
+        ]
+      }
+    };
+
+    const hint = document.getElementById('hint');
+    const cards = document.querySelectorAll('.card');
+    const progress = {};
+
+    cards.forEach(card => {
+      const id = card.dataset.id;
+      progress[id] = 0;
+      card.innerHTML = '';
+
+      const baseImg = document.createElement('img');
+      baseImg.src = data[id].base;
+      baseImg.alt = id;
+      card.appendChild(baseImg);
+
+      card.addEventListener('click', () => {
+        const cfg = data[id];
+        if (progress[id] >= cfg.layers.length) return;
+
+        const layer = document.createElement('img');
+        layer.src = cfg.layers[progress[id]];
+        layer.alt = '';
+        layer.style.position = 'absolute';
+        layer.style.left = '50%';
+        layer.style.top = '50%';
+        layer.style.transform = 'translate(-50%, -50%)';
+        layer.style.maxHeight = '360px';
+        layer.style.width = 'auto';
+        layer.style.zIndex = String(10 + progress[id]);
+
+        card.appendChild(layer);
+        progress[id] += 1;
+
+        if (progress[id] >= cfg.layers.length) {
+          hint.textContent = 'Listo.';
+          setTimeout(() => {
+            window.location.href = 'mensaje-final.html';
+          }, 650);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

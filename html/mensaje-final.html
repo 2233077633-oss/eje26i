@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -20,39 +20,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 90px 20px 40px;
+      padding: 40px 20px;
       text-align: center;
-    }
-    .menu {
-      position: fixed;
-      top: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(10,10,10,0.6);
-      border: 1px solid rgba(217, 201, 179, 0.25);
-      font-family: "Courier New", monospace;
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #d9c9b3;
-      z-index: 10;
-      backdrop-filter: blur(6px);
-    }
-    .menu a {
-      color: inherit;
-      text-decoration: none;
-    }
-    .menu a:hover {
-      color: #ffffff;
-    }
-    .menu a.active {
-      color: #ffffff;
-      text-shadow: 0 0 10px rgba(255,255,255,0.55);
     }
     .question {
       font-family: "Courier New", monospace;
@@ -61,73 +30,9 @@
       font-size: clamp(14px, 2.8vw, 22px);
       color: #8c8377;
     }
-    .answer {
-      margin-top: 26px;
-      display: flex;
-      justify-content: center;
-    }
-    .answer input {
-      width: min(520px, 80vw);
-      padding: 10px 6px;
-      border: none;
-      border-bottom: 1px solid rgba(140, 131, 119, 0.5);
-      background: transparent;
-      text-align: center;
-      font-family: "Georgia", "Times New Roman", serif;
-      font-size: 18px;
-      letter-spacing: 0.08em;
-      color: #d9d2c6;
-      caret-color: #8c8377;
-      outline: none;
-    }
-    .answer input::placeholder {
-      color: rgba(140, 131, 119, 0.6);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-family: "Courier New", monospace;
-      font-size: 11px;
-    }
   </style>
 </head>
 <body>
-  <nav class="menu">
-    <a href="../index.html">Página principal</a>
-    <a href="seleccion.html">Tendencia</a>
-    <a href="mensaje1.html">Temporada</a>
-    <a href="seleccion-final.html">Auténtico</a>
-    <a class="active" href="mensaje-final.html">Armario</a>
-  </nav>
-  <div class="question" id="question-text">¿Cuántas identidades llevas en el armario?</div>
-  <div class="answer">
-    <input type="text" placeholder="Escribe aquí..." aria-label="Respuesta" id="answer-input">
-  </div>
-  <script>
-    const questions = [
-      '¿Cuántas identidades llevas en el armario?',
-      '¿Qué dice tu ropa sobre ti?',
-      '¿En qué momento todo empezó a verse igual?',
-      '¿Por qué usamos ciertas prendas solo por tendencia?',
-      '¿Realmente te gusta lo que llevas puesto?',
-      '¿Te vistes para ti o para los demás?',
-      '¿Elegiste ese estilo… o lo eligieron por ti?',
-      '¿Eso que usas te representa o solo te integra?',
-      '¿Eres tú… o una versión repetida de alguien más?'
-    ];
-
-    const questionEl = document.getElementById('question-text');
-    const storageKey = 'armario-question-index';
-    const currentIndex = Number.parseInt(localStorage.getItem(storageKey), 10);
-    const safeIndex = Number.isNaN(currentIndex) ? 0 : currentIndex % questions.length;
-    questionEl.textContent = questions[safeIndex];
-    localStorage.setItem(storageKey, String((safeIndex + 1) % questions.length));
-
-    const input = document.getElementById('answer-input');
-    input.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        window.location.reload();
-      }
-    });
-  </script>
+  <div class="question">Cuántas identidades llevas en el armario?</div>
 </body>
 </html>

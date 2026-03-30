@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -22,39 +22,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 90px 20px 40px;
+      padding: 40px 20px;
       cursor: pointer;
-    }
-    .menu {
-      position: fixed;
-      top: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(10,10,10,0.6);
-      border: 1px solid rgba(217, 201, 179, 0.25);
-      font-family: "Courier New", monospace;
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #d9c9b3;
-      z-index: 10;
-      backdrop-filter: blur(6px);
-    }
-    .menu a {
-      color: inherit;
-      text-decoration: none;
-    }
-    .menu a:hover {
-      color: #ffffff;
-    }
-    .menu a.active {
-      color: #ffffff;
-      text-shadow: 0 0 10px rgba(255,255,255,0.55);
     }
     .copy {
       text-align: center;
@@ -81,13 +50,6 @@
   </style>
 </head>
 <body onclick="window.location.href='seleccion-final.html'">
-  <nav class="menu" onclick="event.stopPropagation()">
-    <a href="../index.html">Página principal</a>
-    <a href="seleccion.html">Tendencia</a>
-    <a class="active" href="mensaje1.html">Temporada</a>
-    <a href="seleccion-final.html">Auténtico</a>
-    <a href="mensaje-final.html">Armario</a>
-  </nav>
   <main class="copy">
     <h1 class="title">Cada día, millones de prendas.</h1>
     <div class="lines">
@@ -95,7 +57,7 @@
       La industria no vende ropa.<br>
       Vende identidades de temporada.
     </div>
-    <div class="question">¿Cuántas identidades llevas en el armario?</div>
+    <div class="question">Cuántas identidades llevas en el armario?</div>
   </main>
 </body>
 </html>

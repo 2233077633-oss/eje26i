@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -9,6 +9,8 @@
     :root {
       --bg: #0b0b0b;
       --text: #d9d2c6;
+      --muted: #8c8377;
+      --input-bg: rgba(10,10,10,0.65);
     }
     * { box-sizing: border-box; }
     body {
@@ -23,16 +25,92 @@
       padding: 40px 20px;
       text-align: center;
     }
+    .wrap {
+      display: grid;
+      gap: 22px;
+      justify-items: center;
+      max-width: 760px;
+      width: 100%;
+    }
     .question {
       font-family: "Courier New", monospace;
       text-transform: uppercase;
       letter-spacing: 0.25em;
       font-size: clamp(14px, 2.8vw, 22px);
-      color: #8c8377;
+      color: var(--muted);
+    }
+    .answer {
+      width: min(520px, 90vw);
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(217, 210, 198, 0.25);
+      background: var(--input-bg);
+      color: var(--text);
+      font-family: "Courier New", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 12px;
+      outline: none;
+    }
+    .answer::placeholder {
+      color: rgba(217, 210, 198, 0.5);
     }
   </style>
 </head>
 <body>
-  <div class="question">Cuántas identidades llevas en el armario?</div>
+  <div class="wrap">
+    <div id="question" class="question">¿Qué dice tu ropa sobre ti?</div>
+    <input
+      id="answer"
+      class="answer"
+      type="text"
+      placeholder="Escribe y presiona Enter"
+      autocomplete="off"
+      aria-label="Respuesta"
+    />
+  </div>
+  <script>
+    const questions = [
+      "¿Qué dice tu ropa sobre ti?",
+      "¿En qué momento todo empezó a verse igual?",
+      "¿Por qué usamos ciertas prendas solo por tendencia?",
+      "¿Realmente te gusta lo que llevas puesto?",
+      "¿Te vistes para ti o para los demás?",
+      "¿Elegiste ese estilo… o lo eligieron por ti?",
+      "¿Eso que usas te representa o solo te integra?",
+      "¿Eres tú… o una versión repetida de alguien más?"
+    ];
+
+    const questionEl = document.getElementById("question");
+    const answerEl = document.getElementById("answer");
+
+    function nextQuestion() {
+      const lastIndex = Number(sessionStorage.getItem("armarioLastIndex"));
+      let nextIndex = Math.floor(Math.random() * questions.length);
+
+      if (questions.length > 1) {
+        while (nextIndex === lastIndex) {
+          nextIndex = Math.floor(Math.random() * questions.length);
+        }
+      }
+
+      sessionStorage.setItem("armarioLastIndex", String(nextIndex));
+      questionEl.textContent = questions[nextIndex];
+    }
+
+    answerEl.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        if (answerEl.value.trim().length > 0) {
+          answerEl.value = "";
+        }
+        nextQuestion();
+      }
+    });
+
+    window.addEventListener("load", () => {
+      nextQuestion();
+      answerEl.focus();
+    });
+  </script>
 </body>
 </html>

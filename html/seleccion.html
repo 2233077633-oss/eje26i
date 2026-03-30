@@ -107,10 +107,43 @@
   <main class="stage">
     <div class="eyebrow">SOBRE LA ROPA Y LO QUE CREEMOS QUE SOMOS.</div>
     <div class="grid">
-      <div class="card tone-1"><img src="../assets/fastuno.png" alt="Sal"></div>
-      <div class="card tone-2"><img src="../assets/fastdos.png" alt="Lina"></div>
-      <div class="card tone-3"><img src="../assets/fastcuatro.png" alt="Alfonso"></div>
+      <div class="card tone-1"><img id="img-1" src="../assets/fastuno.png" alt="Sal"></div>
+      <div class="card tone-2"><img id="img-2" src="../assets/fastdos.png" alt="Lina"></div>
+      <div class="card tone-3"><img id="img-3" src="../assets/fastcuatro.png" alt="Alfonso"></div>
     </div>
   </main>
+  <script>
+    (function() {
+      const groups = [
+        ["fastuno.png", "fastdos.png", "fastcuatro.png"],
+        ["rojou.png", "rojoun.png", "rojouno.png"],
+        ["azuluno.png", "azulun.png", "azulu.png"],
+        ["naranjaun.png", "naranjauno.png", "naranjau.png"]
+      ];
+
+      const storageKey = 'seleccionGroupIndex';
+      let index = Number(localStorage.getItem(storageKey));
+
+      if (!Number.isInteger(index) || index < 0 || index >= groups.length) {
+        index = 0;
+      }
+
+      const nextIndex = (index + 1) % groups.length;
+      localStorage.setItem(storageKey, nextIndex);
+
+      const selectedGroup = groups[nextIndex];
+      const images = [
+        document.getElementById('img-1'),
+        document.getElementById('img-2'),
+        document.getElementById('img-3')
+      ];
+
+      images.forEach((img, idx) => {
+        if (img) {
+          img.src = '../assets/' + selectedGroup[idx];
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

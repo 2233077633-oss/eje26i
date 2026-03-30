@@ -97,11 +97,30 @@
     <a href="seleccion-final.html">Auténtico</a>
     <a class="active" href="mensaje-final.html">Armario</a>
   </nav>
-  <div class="question">¿Cuántas identidades llevas en el armario?</div>
+  <div class="question" id="question-text">¿Cuántas identidades llevas en el armario?</div>
   <div class="answer">
     <input type="text" placeholder="Escribe aquí..." aria-label="Respuesta" id="answer-input">
   </div>
   <script>
+    const questions = [
+      '¿Cuántas identidades llevas en el armario?',
+      '¿Qué dice tu ropa sobre ti?',
+      '¿En qué momento todo empezó a verse igual?',
+      '¿Por qué usamos ciertas prendas solo por tendencia?',
+      '¿Realmente te gusta lo que llevas puesto?',
+      '¿Te vistes para ti o para los demás?',
+      '¿Elegiste ese estilo… o lo eligieron por ti?',
+      '¿Eso que usas te representa o solo te integra?',
+      '¿Eres tú… o una versión repetida de alguien más?'
+    ];
+
+    const questionEl = document.getElementById('question-text');
+    const storageKey = 'armario-question-index';
+    const currentIndex = Number.parseInt(localStorage.getItem(storageKey), 10);
+    const safeIndex = Number.isNaN(currentIndex) ? 0 : currentIndex % questions.length;
+    questionEl.textContent = questions[safeIndex];
+    localStorage.setItem(storageKey, String((safeIndex + 1) % questions.length));
+
     const input = document.getElementById('answer-input');
     input.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
